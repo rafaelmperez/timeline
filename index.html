@@ -276,10 +276,90 @@
        HEADER
        ─────────────────────────────────────────────────────────────────────────── */
     .historia-header {
+      position: relative;
       max-width: 42rem;
       margin: 0 auto var(--space-10);
       border-bottom: 2px solid var(--border-strong);
       padding-bottom: var(--space-6);
+    }
+    
+    /* Watermark institucional - escudo tenue de fondo */
+    .historia-header::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 280px;
+      height: 336px;
+      background-image: url('https://herrerahoy.es/img/Escudo_de_Herrera_Sevilla.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.02;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    body.dark-mode .historia-header::before {
+      opacity: 0.015;
+    }
+    
+    .historia-header > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Escudo institucional como marca editorial */
+    .header-emblem {
+      margin: 0 auto var(--space-6);
+      text-align: center;
+    }
+    
+    .header-emblem a {
+      display: inline-block;
+      transition: all var(--transition-base);
+    }
+    
+    .header-emblem img {
+      width: 48px;
+      height: auto;
+      opacity: 0.65;
+      filter: grayscale(0.4);
+      transition: all var(--transition-base);
+    }
+    
+    body.dark-mode .header-emblem img {
+      opacity: 0.5;
+      filter: grayscale(0.6) brightness(0.9);
+    }
+    
+    .header-emblem a:hover img {
+      opacity: 0.85;
+      filter: grayscale(0);
+      transform: scale(1.05);
+    }
+    
+    body.dark-mode .header-emblem a:hover img {
+      opacity: 0.75;
+      filter: grayscale(0.3) brightness(1);
+    }
+    
+    .header-emblem a:focus-visible {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 6px;
+    }
+    
+    @media (min-width: 768px) {
+      .header-emblem img {
+        width: 72px;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .header-emblem {
+        margin-bottom: var(--space-7);
+      }
     }
     
     .header-kicker {
@@ -312,6 +392,32 @@
       font-weight: 400;
       max-width: 36rem;
       margin: 0;
+    }
+    
+    /* Pieza editorial - toque humano sin romper institucionalidad */
+    .header-note {
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border-faint);
+      font-family: var(--font-serif);
+      font-size: var(--text-sm);
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--text-tertiary);
+      max-width: 34rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Nota editorial - nivel revista/museo */
+    .editorial-note {
+      margin-top: var(--space-4);
+      font-family: var(--font-serif);
+      font-size: var(--text-sm);
+      color: var(--text-quaternary);
+      max-width: 32rem;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     /* Scroll hint - subtle and disappears on scroll */
@@ -534,7 +640,7 @@
     
     .entry-content p {
       font-size: var(--text-base);
-      line-height: 1.7;
+      line-height: 1.75;
       color: var(--text-secondary);
       margin: 0;
     }
@@ -627,6 +733,299 @@
       background: var(--bg-subtle);
       border-top: 1px solid var(--border-faint);
       line-height: 1.5;
+    }
+    
+    /* Fuente de imagen - credibilidad archivística con details */
+    .entry-figure figcaption .fig-source {
+      display: block;
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border-faint);
+    }
+    
+    .fig-source summary {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-quaternary);
+      cursor: pointer;
+      padding: 0.25rem 0;
+      list-style: none;
+      transition: color var(--transition-fast);
+    }
+    
+    .fig-source summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    .fig-source summary::before {
+      content: '+ ';
+      display: inline-block;
+      width: 1em;
+      font-weight: 700;
+    }
+    
+    .fig-source[open] summary::before {
+      content: '− ';
+    }
+    
+    .fig-source summary:hover {
+      color: var(--accent-primary);
+    }
+    
+    .fig-source summary:focus-visible {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 2px;
+    }
+    
+    .source-details {
+      margin-top: 0.5rem;
+      padding: 0.75rem;
+      background: var(--bg-subtle);
+      border-left: 2px solid var(--accent-secondary);
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+    
+    .source-details p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+    
+    .source-details p + p {
+      margin-top: 0.35rem;
+    }
+    
+    .source-details strong {
+      font-weight: 600;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    /* Separador editorial - pasado → presente */
+    .timeline-divider {
+      margin: var(--space-9) 0 var(--space-7);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-quaternary);
+      text-align: center;
+    }
+    
+    /* ───────────────────────────────────────────────────────────────────────────
+       ÍNDICE NAVEGACIÓN - Minimal institucional
+       ─────────────────────────────────────────────────────────────────────────── */
+    #index-toggle {
+      position: fixed;
+      top: var(--space-3);
+      left: var(--space-3);
+      z-index: 9999;
+      width: 52px;
+      height: 52px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-xs);
+    }
+    
+    #index-toggle:hover {
+      background: var(--bg-surface);
+      color: var(--accent-primary);
+      border-color: var(--border-default);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    #index-toggle:active {
+      transform: scale(0.96);
+    }
+    
+    #index-toggle:focus-visible {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 3px;
+    }
+    
+    .index-icon {
+      width: 20px;
+      height: 20px;
+      transition: all var(--transition-base);
+    }
+    
+    @media (max-width: 767px) {
+      #index-toggle {
+        width: 48px;
+        height: 48px;
+      }
+      
+      .index-icon {
+        width: 18px;
+        height: 18px;
+      }
+    }
+    
+    /* Panel del índice */
+    .index-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 320px;
+      max-width: 85vw;
+      background: var(--bg-elevated);
+      border-right: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-lg);
+      z-index: 10000;
+      transform: translateX(-100%);
+      transition: transform var(--transition-slow);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .index-panel:not([hidden]) {
+      transform: translateX(0);
+    }
+    
+    /* Header del panel */
+    .index-header {
+      position: sticky;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-4);
+      background: var(--bg-surface);
+      border-bottom: 2px solid var(--border-strong);
+      z-index: 1;
+    }
+    
+    .index-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    
+    #index-close {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+    
+    #index-close:hover {
+      background: var(--bg-subtle);
+      color: var(--text-primary);
+      border-color: var(--border-default);
+    }
+    
+    #index-close:focus-visible {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 2px;
+    }
+    
+    #index-close svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    /* Navegación del índice */
+    .index-nav {
+      padding: var(--space-2) 0;
+    }
+    
+    .index-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .index-nav li {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .index-nav a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-2) var(--space-4);
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all var(--transition-fast);
+    }
+    
+    .index-nav a:hover {
+      background: var(--bg-subtle);
+      color: var(--text-primary);
+      border-left-color: var(--accent-primary);
+    }
+    
+    .index-nav a:focus-visible {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: -2px;
+    }
+    
+    .index-nav a span {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--text-quaternary);
+      letter-spacing: 0.05em;
+    }
+    
+    .index-divider {
+      margin: var(--space-3) var(--space-4) var(--space-2);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-quaternary);
+    }
+    
+    /* Overlay */
+    .index-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 9998;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+    
+    body.dark-mode .index-overlay {
+      background: rgba(0, 0, 0, 0.6);
+    }
+    
+    .index-overlay:not([hidden]) {
+      opacity: 1;
     }
     
     /* ───────────────────────────────────────────────────────────────────────────
@@ -743,6 +1142,13 @@
     /* ───────────────────────────────────────────────────────────────────────────
        ACCESSIBILITY
        ─────────────────────────────────────────────────────────────────────────── */
+    
+    /* Focus visible global para todos los enlaces */
+    a:focus-visible {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 3px;
+    }
+    
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -848,6 +1254,54 @@
 <a class="skip-link" href="#historia">Saltar al contenido principal</a>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
+     ÍNDICE NAVEGACIÓN
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<button 
+  id="index-toggle" 
+  aria-label="Abrir índice de navegación"
+  aria-expanded="false"
+  aria-controls="index-panel"
+  title="Índice de momentos históricos"
+>
+  <svg class="index-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</button>
+
+<aside id="index-panel" class="index-panel" hidden>
+  <div class="index-header">
+    <h2 class="index-title">Momentos Históricos</h2>
+    <button id="index-close" aria-label="Cerrar índice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  
+  <nav class="index-nav" aria-label="Navegación por momentos históricos">
+    <ul>
+      <li><a href="#termas-romanas">Termas Romanas <span>S. III</span></a></li>
+      <li><a href="#frontera-medieval">La Frontera que Desapareció <span>S. XIV-XV</span></a></li>
+      <li><a href="#cortijo-herrera">El Cortijo que Dio Nombre <span>1511</span></a></li>
+      <li><a href="#expulsion-moriscos">Cuando los Moriscos se Fueron <span>1610</span></a></li>
+      <li><a href="#puebla-oficial">La Puebla Oficial <span>1631</span></a></li>
+      <li><a href="#iglesia-santiago">La Iglesia en el Centro <span>1653</span></a></li>
+      <li><a href="#migracion-interna">Gente de Otros Pueblos <span>S. XVIII</span></a></li>
+      <li><a href="#expansion-siglo-xix">El Pueblo que Crece <span>S. XIX</span></a></li>
+      <li><a href="#escudo-oficial">El Escudo Oficial <span>1994</span></a></li>
+      <li><a href="#bic-termas">Termas Protegidas <span>2007</span></a></li>
+      <li class="index-divider">Contemporáneo</li>
+      <li><a href="#herrera-presente">Casi Siete Mil Historias <span>2026</span></a></li>
+    </ul>
+  </nav>
+</aside>
+
+<div id="index-overlay" class="index-overlay" hidden></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
      THEME TOGGLE
      ═══════════════════════════════════════════════════════════════════════════ -->
 <button 
@@ -899,6 +1353,18 @@
       estos son los momentos que nos hicieron ser quienes somos.
     </p>
     
+    <!-- Pieza editorial - alma sin romper institucionalidad -->
+    <p class="header-note">
+      Esto no es una lista de fechas. Es memoria viva: 
+      tierra que fue frontera, pueblo que creció con gente de otros lugares, 
+      comunidad que decide quedarse.
+    </p>
+    
+    <!-- Nota editorial - nivel revista/museo -->
+    <p class="editorial-note">
+      Esta cronología no pretende ser exhaustiva, sino ofrecer una mirada accesible a los momentos que marcaron la historia de Herrera.
+    </p>
+    
     <!-- Scroll hint - desaparece al primer scroll -->
     <div class="scroll-hint" aria-hidden="true">
       <span>Desliza hacia abajo</span>
@@ -915,7 +1381,7 @@
     <article class="timeline-entry milestone" id="termas-romanas">
       <div class="entry-marker" aria-hidden="true"></div>
       
-      <time datetime="0200" class="entry-date">Siglo III</time>
+      <time datetime="0200-01-01" class="entry-date">Siglo III</time>
       <h2 class="entry-title">Las Termas Romanas</h2>
       <p class="entry-subtitle">Cuando Herrera era un lugar de encuentro</p>
       
@@ -945,7 +1411,17 @@
           width="800"
           height="600"
         />
-        <figcaption>Mosaico del "Pugilator", siglo III d.C.</figcaption>
+        <figcaption>
+          Mosaico del "Pugilator", siglo III d.C.
+          <details class="fig-source">
+            <summary>Fuente</summary>
+            <div class="source-details">
+              <p><strong>Origen:</strong> Conjunto Termal Romano de Herrera</p>
+              <p><strong>Estado:</strong> Bien de Interés Cultural (BIC)</p>
+              <p><strong>Declaración:</strong> Junta de Andalucía, 2007</p>
+            </div>
+          </details>
+        </figcaption>
       </figure>
     </article>
 
@@ -955,7 +1431,7 @@
     <article class="timeline-entry" id="frontera-medieval">
       <div class="entry-marker" aria-hidden="true"></div>
       
-      <time datetime="1400" class="entry-date">Siglos XIV–XV</time>
+      <time datetime="1400-01-01" class="entry-date">Siglos XIV–XV</time>
       <h2 class="entry-title">La Frontera que Desapareció</h2>
       <p class="entry-subtitle">Vivir entre dos mundos</p>
       
@@ -985,10 +1461,20 @@
           src="https://herrerahoy.es/img/timeline/alhonoz.webp" 
           alt="Restos de la fortaleza medieval de Alhonoz, marcando la antigua frontera entre reinos cristianos y musulmanes"
           loading="lazy"
+          decoding="async"
           width="800"
           height="600"
         />
-        <figcaption>Fortaleza de Alhonoz, en la antigua frontera</figcaption>
+        <figcaption>
+          Fortaleza de Alhonoz, en la antigua frontera
+          <details class="fig-source">
+            <summary>Fuente</summary>
+            <div class="source-details">
+              <p><strong>Origen:</strong> Patrimonio histórico de la comarca</p>
+              <p><strong>Periodo:</strong> Siglos XIV-XV</p>
+            </div>
+          </details>
+        </figcaption>
       </figure>
     </article>
 
@@ -998,7 +1484,7 @@
     <article class="timeline-entry" id="cortijo-herrera">
       <div class="entry-marker" aria-hidden="true"></div>
       
-      <time datetime="1511" class="entry-date">1511–1514</time>
+      <time datetime="1511-01-01" class="entry-date">1511–1514</time>
       <h2 class="entry-title">El Cortijo que Dio Nombre</h2>
       <p class="entry-subtitle">Antes del pueblo, había un lugar</p>
       
@@ -1026,7 +1512,7 @@
     <article class="timeline-entry" id="expulsion-moriscos">
       <div class="entry-marker" aria-hidden="true"></div>
       
-      <time datetime="1610" class="entry-date">1610</time>
+      <time datetime="1610-01-01" class="entry-date">1610</time>
       <h2 class="entry-title">Cuando los Moriscos se Fueron</h2>
       <p class="entry-subtitle">Un vacío que otros llenaron</p>
       
@@ -1053,12 +1539,22 @@
       <figure class="entry-figure">
         <img 
           src="https://herrerahoy.es/img/timeline/Travels-Zdjecie-wyrozniajace-Natalia.webp" 
-          alt="Representación histórica de la expulsión de los moriscos de España en 1610"
+          alt="Camino rural en la campiña andaluza, imagen simbólica de las partidas y llegadas en la historia de Herrera"
           loading="lazy"
+          decoding="async"
           width="800"
           height="600"
         />
-        <figcaption>Expulsión de los moriscos, 1610</figcaption>
+        <figcaption>
+          Un camino vacío: símbolo de partidas y llegadas (1610)
+          <details class="fig-source">
+            <summary>Fuente</summary>
+            <div class="source-details">
+              <p><strong>Tipo:</strong> Imagen contextual / simbólica</p>
+              <p><strong>Periodo referenciado:</strong> Expulsión de moriscos, 1610</p>
+            </div>
+          </details>
+        </figcaption>
       </figure>
     </article>
 
@@ -1068,7 +1564,7 @@
     <article class="timeline-entry milestone" id="puebla-oficial">
       <div class="entry-marker" aria-hidden="true"></div>
       
-      <time datetime="1631" class="entry-date">1631</time>
+      <time datetime="1631-01-01" class="entry-date">1631</time>
       <h2 class="entry-title">La Puebla que se Hizo Oficial</h2>
       <p class="entry-subtitle">El día que Herrera apareció en los documentos</p>
       
@@ -1098,11 +1594,22 @@
           src="https://herrerahoy.es/img/timeline/testamento-garcia-de-herrera.jpg" 
           alt="Documento histórico del testamento de García de Herrera, fundación oficial de la Puebla de Herrera en 1631"
           loading="lazy"
+          decoding="async"
           width="600"
           height="800"
           style="max-width: 400px; margin: 0 auto; display: block;"
         />
-        <figcaption>Testamento de García de Herrera, 1631</figcaption>
+        <figcaption>
+          Testamento de García de Herrera, 1631
+          <details class="fig-source">
+            <summary>Fuente</summary>
+            <div class="source-details">
+              <p><strong>Origen:</strong> Archivo documental histórico</p>
+              <p><strong>Documento:</strong> Testamento fundacional</p>
+              <p><strong>Año:</strong> 1631</p>
+            </div>
+          </details>
+        </figcaption>
       </figure>
     </article>
 
@@ -1112,7 +1619,7 @@
     <article class="timeline-entry milestone" id="iglesia-santiago">
       <div class="entry-marker" aria-hidden="true"></div>
       
-      <time datetime="1653" class="entry-date">1653</time>
+      <time datetime="1653-01-01" class="entry-date">1653</time>
       <h2 class="entry-title">La Iglesia en el Centro</h2>
       <p class="entry-subtitle">Un lugar donde reunirse</p>
       
@@ -1141,10 +1648,20 @@
           src="https://herrerahoy.es/img/timeline/HERRERA-Plaza%20Parroquia%20de%20Santiago.JPG" 
           alt="Vista de la Plaza de la Parroquia de Santiago el Mayor en Herrera"
           loading="lazy"
+          decoding="async"
           width="800"
           height="600"
         />
-        <figcaption>Plaza de la Parroquia de Santiago el Mayor</figcaption>
+        <figcaption>
+          Plaza de la Parroquia de Santiago el Mayor
+          <details class="fig-source">
+            <summary>Fuente</summary>
+            <div class="source-details">
+              <p><strong>Origen:</strong> Archivo fotográfico municipal</p>
+              <p><strong>Edificio:</strong> Iglesia Parroquial de Santiago el Mayor (1653)</p>
+            </div>
+          </details>
+        </figcaption>
       </figure>
     </article>
 
@@ -1154,7 +1671,7 @@
     <article class="timeline-entry" id="migracion-interna">
       <div class="entry-marker" aria-hidden="true"></div>
       
-      <time datetime="1725" class="entry-date">1700–1750</time>
+      <time datetime="1700-01-01" class="entry-date">1700–1750</time>
       <h2 class="entry-title">Gente que Llegaba de Otros Pueblos</h2>
       <p class="entry-subtitle">Herrera crece</p>
       
@@ -1186,7 +1703,7 @@
     <article class="timeline-entry" id="expansion-siglo-xix">
       <div class="entry-marker" aria-hidden="true"></div>
       
-      <time datetime="1850" class="entry-date">Siglo XIX</time>
+      <time datetime="1800-01-01" class="entry-date">Siglo XIX</time>
       <h2 class="entry-title">El Pueblo que Crece</h2>
       <p class="entry-subtitle">Expansión y normalidad</p>
       
@@ -1214,10 +1731,20 @@
           src="https://herrerahoy.es/img/timeline/siglo%20XIX.webp" 
           alt="Fotografía histórica de Herrera durante el siglo XIX"
           loading="lazy"
+          decoding="async"
           width="800"
           height="600"
         />
-        <figcaption>Herrera en el siglo XIX</figcaption>
+        <figcaption>
+          Herrera en el siglo XIX
+          <details class="fig-source">
+            <summary>Fuente</summary>
+            <div class="source-details">
+              <p><strong>Origen:</strong> Colección fotográfica histórica</p>
+              <p><strong>Periodo:</strong> Siglo XIX</p>
+            </div>
+          </details>
+        </figcaption>
       </figure>
     </article>
 
@@ -1227,7 +1754,7 @@
     <article class="timeline-entry" id="escudo-oficial">
       <div class="entry-marker" aria-hidden="true"></div>
       
-      <time datetime="1994" class="entry-date">1994</time>
+      <time datetime="1994-01-01" class="entry-date">1994</time>
       <h2 class="entry-title">El Escudo Oficial</h2>
       <p class="entry-subtitle">Una identidad reconocida</p>
       
@@ -1252,11 +1779,22 @@
           src="https://herrerahoy.es/img/timeline/Escudo_de_Herrera_(Sevilla).png" 
           alt="Escudo heráldico oficial del municipio de Herrera"
           loading="lazy"
+          decoding="async"
           width="400"
           height="480"
           style="max-width: 180px; margin: 0 auto; display: block;"
         />
-        <figcaption>Escudo heráldico oficial de Herrera</figcaption>
+        <figcaption>
+          Escudo heráldico oficial de Herrera
+          <details class="fig-source">
+            <summary>Fuente</summary>
+            <div class="source-details">
+              <p><strong>Origen:</strong> Decreto oficial</p>
+              <p><strong>Publicación:</strong> Boletín Oficial de la Junta de Andalucía (BOJA)</p>
+              <p><strong>Año:</strong> 1994</p>
+            </div>
+          </details>
+        </figcaption>
       </figure>
     </article>
 
@@ -1266,7 +1804,7 @@
     <article class="timeline-entry milestone" id="bic-termas">
       <div class="entry-marker" aria-hidden="true"></div>
       
-      <time datetime="2007" class="entry-date">2007</time>
+      <time datetime="2007-01-01" class="entry-date">2007</time>
       <h2 class="entry-title">Las Termas, Protegidas para Siempre</h2>
       <p class="entry-subtitle">Cuidar lo que heredamos</p>
       
@@ -1292,13 +1830,26 @@
           src="https://herrerahoy.es/img/timeline/conjunto_termal_herrera.JPG" 
           alt="Vista exterior del conjunto termal romano de Herrera, declarado Bien de Interés Cultural"
           loading="lazy"
+          decoding="async"
           width="800"
           height="600"
         />
-        <figcaption>Conjunto termal romano, protegido desde 2007</figcaption>
+        <figcaption>
+          Conjunto termal romano, protegido desde 2007
+          <details class="fig-source">
+            <summary>Fuente</summary>
+            <div class="source-details">
+              <p><strong>Origen:</strong> Junta de Andalucía</p>
+              <p><strong>Declaración:</strong> Bien de Interés Cultural (BIC)</p>
+              <p><strong>Año:</strong> 2007</p>
+            </div>
+          </details>
+        </figcaption>
       </figure>
     </article>
 
+    <!-- Separador editorial: pasado → presente -->
+    <div class="timeline-divider">Herrera contemporánea</div>
 
 
     <!-- ═════════════════════════════════════════════════════════════════════
@@ -1307,7 +1858,7 @@
     <article class="timeline-entry milestone" id="herrera-presente">
       <div class="entry-marker" aria-hidden="true"></div>
       
-      <time datetime="2026" class="entry-date">2026</time>
+      <time datetime="2026-02-09" class="entry-date">2026</time>
       <h2 class="entry-title">Casi Siete Mil Historias</h2>
       <p class="entry-subtitle">El pueblo que somos</p>
       
@@ -1337,11 +1888,10 @@
           src="https://herrerahoy.es/img/timeline/Vista_a%C3%A9rea_de_Herrera_(Sevilla).jpg" 
           alt="Vista aérea del municipio de Herrera en la actualidad, mostrando el casco urbano"
           loading="lazy"
+          decoding="async"
           width="800"
           height="600"
         />
-        <figcaption>Vista aérea de Herrera en la actualidad</figcaption>
-      </figure>
     </article>
 
   </div>
@@ -1358,8 +1908,11 @@
       <p style="font-size: var(--text-xs); color: var(--text-disabled); margin-bottom: var(--space-1);">
         <strong>Última revisión:</strong> Febrero 2026
       </p>
+      <p style="font-size: var(--text-xs); color: var(--text-disabled); margin-bottom: var(--space-2);">
+        <strong>Responsable editorial:</strong> Herrera Hoy - Iniciativa digital ciudadana
+      </p>
       <p style="font-size: var(--text-xs); color: var(--text-disabled); margin: 0;">
-        <strong>Responsable editorial:</strong> - Iniciativa digital ciudadana
+        Contenido elaborado con fuentes históricas y memoria local.
       </p>
     </div>
   </footer>
@@ -1413,6 +1966,70 @@
   });
   
   // ─────────────────────────────────────────────────────────────────────────
+  // ÍNDICE NAVEGACIÓN - Institucional minimal
+  // ─────────────────────────────────────────────────────────────────────────
+  const indexToggle = document.getElementById('index-toggle');
+  const indexPanel = document.getElementById('index-panel');
+  const indexClose = document.getElementById('index-close');
+  const indexOverlay = document.getElementById('index-overlay');
+  
+  function openIndex() {
+    indexPanel.removeAttribute('hidden');
+    indexOverlay.removeAttribute('hidden');
+    indexToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    
+    // Focus en el botón de cerrar
+    setTimeout(() => indexClose.focus(), 100);
+  }
+  
+  function closeIndex() {
+    indexPanel.setAttribute('hidden', '');
+    indexOverlay.setAttribute('hidden', '');
+    indexToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    indexToggle.focus();
+  }
+  
+  indexToggle.addEventListener('click', openIndex);
+  indexClose.addEventListener('click', closeIndex);
+  indexOverlay.addEventListener('click', closeIndex);
+  
+  // Cerrar con Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !indexPanel.hasAttribute('hidden')) {
+      closeIndex();
+    }
+  });
+  
+  // Cerrar al hacer click en un enlace del índice
+  const indexLinks = indexPanel.querySelectorAll('a');
+  indexLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      setTimeout(closeIndex, 200);
+    });
+  });
+  
+  // Trap de focus dentro del panel
+  indexPanel.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      const focusableElements = indexPanel.querySelectorAll(
+        'button, a[href]'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    }
+  });
+  
+  // ─────────────────────────────────────────────────────────────────────────
   // SCROLL HINT - Hide on first scroll
   // ─────────────────────────────────────────────────────────────────────────
   const scrollHint = document.querySelector('.scroll-hint');
@@ -1426,1384 +2043,6 @@
     };
     window.addEventListener('scroll', hideHint, { passive: true, once: true });
   }
-  
-  // ─────────────────────────────────────────────────────────────────────────
-  // PREMIUM STAGGERED REVEAL - Natural human-level timing
-  // ─────────────────────────────────────────────────────────────────────────
-  
-  // Apply staggered delays to each entry
-  function applyStaggeredDelays() {
-    const entries = document.querySelectorAll('.timeline-entry');
-    entries.forEach((entry, index) => {
-      // 70ms stagger per entry = natural premium timing
-      const delay = index * 70;
-      entry.style.setProperty('--entry-delay', `${delay}ms`);
-    });
-  }
-  
-  // Intersection Observer for scroll reveal
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '0px 0px -80px 0px',
-        threshold: 0.15
-      }
-    );
-    
-    // Apply delays before observing
-    applyStaggeredDelays();
-    
-    document.querySelectorAll('.timeline-entry').forEach(entry => {
-      observer.observe(entry);
-    });
-  } else {
-    // No animation for reduced motion preference
-    document.querySelectorAll('.timeline-entry').forEach(entry => {
-      entry.classList.add('visible');
-    });
-  }
-  
-})();
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Viaje histórico por Herrera: desde las termas romanas hasta el pueblo de hoy. Memoria colectiva de un pueblo sevillano con casi 2.000 años de historia.">
-  <meta name="robots" content="noindex, nofollow">
-  
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Historia de Herrera - Memoria de nuestro Pueblo">
-  <meta property="og:description" content="Viaje histórico por Herrera: desde las termas romanas hasta el pueblo de hoy. Memoria colectiva de un pueblo sevillano con casi 2.000 años de historia.">
-  <meta property="og:locale" content="es_ES">
-  
-  <!-- Theme Color (dynamic) -->
-  <meta name="theme-color" content="#FDFDFB" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0D0D0D" media="(prefers-color-scheme: dark)">
-  
-  <title>Historia de Herrera - Memoria de nuestro Pueblo</title>
-  
-  <style>
-    /* ═══════════════════════════════════════════════════════════════════════════
-       HISTORIA DE HERRERA - DISEÑO INSTITUCIONAL ELITE
-       
-       Inspiración: British Museum Archives + Rijksmuseum Digital + Swiss Grid
-       Principios: Precision, Hierarchy, Restraint, Timelessness
-       Sistema: Zero border-radius, Perfect alignment, Human craft
-       ═══════════════════════════════════════════════════════════════════════════ */
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       RESET & FOUNDATION
-       ─────────────────────────────────────────────────────────────────────────── */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    html {
-      font-size: 16px;
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-    
-    @media (min-width: 768px) {
-      html { font-size: 17px; }
-    }
-    
-    @media (min-width: 1200px) {
-      html { font-size: 18px; }
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       DESIGN TOKENS - LIGHT MODE
-       ─────────────────────────────────────────────────────────────────────────── */
-    :root {
-      /* Institutional palette - inspired by European archives */
-      --noir: #1A1A1A;
-      --graphite: #2D2D2D;
-      --charcoal: #404040;
-      --slate: #5A5A5A;
-      --stone: #6E6E6E;
-      --pebble: #8C8C8C;
-      --ash: #B0B0B0;
-      --mist: #CFCFCF;
-      --vapor: #E8E8E8;
-      --paper: #F5F5F3;
-      --ivory: #FDFDFB;
-      
-      /* Accent - refined navy */
-      --accent-deep: #1E2B4A;
-      --accent-base: #2A3F5F;
-      --accent-soft: #4A6382;
-      
-      /* Semantic assignments */
-      --bg-canvas: var(--ivory);
-      --bg-surface: var(--paper);
-      --bg-elevated: #FFFFFF;
-      --bg-subtle: var(--vapor);
-      
-      --text-primary: var(--noir);
-      --text-secondary: var(--graphite);
-      --text-tertiary: var(--slate);
-      --text-quaternary: var(--stone);
-      --text-disabled: var(--pebble);
-      
-      --border-strong: var(--charcoal);
-      --border-default: var(--stone);
-      --border-subtle: var(--mist);
-      --border-faint: var(--vapor);
-      
-      --accent-primary: var(--accent-deep);
-      --accent-secondary: var(--accent-base);
-      
-      /* Typography scale - modular 1.25 */
-      --text-xs: 0.64rem;      /* 11.52px */
-      --text-sm: 0.8rem;       /* 14.4px */
-      --text-base: 1rem;       /* 18px */
-      --text-md: 1.25rem;      /* 22.5px */
-      --text-lg: 1.5625rem;    /* 28.125px */
-      --text-xl: 1.953rem;     /* 35.15px */
-      --text-2xl: 2.441rem;    /* 43.94px */
-      --text-3xl: 3.052rem;    /* 54.94px */
-      
-      /* Spacing - 8px base grid */
-      --space-1: 0.5rem;    /* 8px */
-      --space-2: 1rem;      /* 16px */
-      --space-3: 1.5rem;    /* 24px */
-      --space-4: 2rem;      /* 32px */
-      --space-5: 2.5rem;    /* 40px */
-      --space-6: 3rem;      /* 48px */
-      --space-7: 4rem;      /* 64px */
-      --space-8: 5rem;      /* 80px */
-      --space-9: 6rem;      /* 96px */
-      --space-10: 8rem;     /* 128px */
-      
-      /* Fonts - System fonts only (no external dependencies) */
-      --font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      --font-mono: ui-monospace, 'SF Mono', Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Courier New', monospace;
-      
-      /* Transitions - Premium timing */
-      --transition-instant: 120ms cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-fast: 220ms cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-base: 350ms cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-slow: 550ms cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-slower: 750ms cubic-bezier(0.4, 0, 0.2, 1);
-      
-      /* Premium reveal animation - human-level UX */
-      --reveal-duration: 500ms;
-      --reveal-easing: cubic-bezier(0.4, 0, 0.2, 1);
-      --reveal-stagger: 70ms;
-      
-      /* Shadows - subtle institutional */
-      --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
-      --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       DARK MODE - Improved contrast
-       ─────────────────────────────────────────────────────────────────────────── */
-    body.dark-mode {
-      --bg-canvas: #0D0D0D;
-      --bg-surface: #151515;
-      --bg-elevated: #1F1F1F;
-      --bg-subtle: #2A2A2A;
-      
-      --text-primary: #EBEBEB;
-      --text-secondary: #D9D9D9;
-      --text-tertiary: #B8B8B8;
-      --text-quaternary: #9E9E9E;
-      --text-disabled: #767676;
-      
-      --border-strong: #B0B0B0;
-      --border-default: #5A5A5A;
-      --border-subtle: #383838;
-      --border-faint: #252525;
-      
-      --accent-primary: #5A7FA3;
-      --accent-secondary: #4A6382;
-      
-      --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
-      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
-      --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.5);
-      --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.6);
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       BODY & BASE
-       ─────────────────────────────────────────────────────────────────────────── */
-    body {
-      font-family: var(--font-sans);
-      background: var(--bg-canvas);
-      color: var(--text-primary);
-      line-height: 1.6;
-      font-weight: 400;
-      transition: background var(--transition-slow), color var(--transition-base);
-    }
-    
-    /* Optimized paper texture - reduced opacity, disabled on mobile/reduced-motion */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: 
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 1px,
-          rgba(0, 0, 0, 0.006) 1px,
-          rgba(0, 0, 0, 0.006) 2px
-        );
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.4;
-    }
-    
-    body.dark-mode::before {
-      background-image: 
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 1px,
-          rgba(255, 255, 255, 0.008) 1px,
-          rgba(255, 255, 255, 0.008) 2px
-        );
-      opacity: 0.2;
-    }
-    
-    /* Disable texture on small screens for performance */
-    @media (max-width: 640px) {
-      body::before {
-        display: none;
-      }
-    }
-    
-    /* Disable texture for users who prefer reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      body::before {
-        display: none;
-      }
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       SKIP LINK - Institutional accessibility
-       ─────────────────────────────────────────────────────────────────────────── */
-    .skip-link {
-      position: absolute;
-      top: -100px;
-      left: var(--space-3);
-      z-index: 10000;
-      padding: var(--space-2) var(--space-3);
-      background: var(--accent-primary);
-      color: white;
-      font-family: var(--font-sans);
-      font-size: var(--text-sm);
-      font-weight: 600;
-      text-decoration: none;
-      transition: top var(--transition-fast);
-    }
-    
-    .skip-link:focus {
-      top: var(--space-3);
-      outline: 2px solid white;
-      outline-offset: 3px;
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       MAIN CONTAINER
-       ─────────────────────────────────────────────────────────────────────────── */
-    .historia-container {
-      position: relative;
-      z-index: 2;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: var(--space-8) var(--space-3) var(--space-10);
-    }
-    
-    @media (min-width: 640px) {
-      .historia-container {
-        padding: var(--space-9) var(--space-4) var(--space-10);
-      }
-    }
-    
-    @media (min-width: 1024px) {
-      .historia-container {
-        padding: var(--space-10) var(--space-6) var(--space-10);
-      }
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       HEADER
-       ─────────────────────────────────────────────────────────────────────────── */
-    .historia-header {
-      max-width: 42rem;
-      margin: 0 auto var(--space-10);
-      border-bottom: 2px solid var(--border-strong);
-      padding-bottom: var(--space-6);
-    }
-    
-    .header-kicker {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--text-quaternary);
-      margin-bottom: var(--space-3);
-      display: block;
-    }
-    
-    .header-title {
-      font-family: var(--font-serif);
-      font-size: clamp(var(--text-2xl), 6vw, var(--text-3xl));
-      font-weight: 600;
-      line-height: 1.1;
-      letter-spacing: -0.025em;
-      color: var(--text-primary);
-      margin: 0 0 var(--space-4);
-      font-feature-settings: 'liga', 'kern';
-    }
-    
-    .header-intro {
-      font-family: var(--font-serif);
-      font-size: var(--text-md);
-      line-height: 1.5;
-      color: var(--text-secondary);
-      font-weight: 400;
-      max-width: 36rem;
-      margin: 0;
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       TIMELINE GRID
-       ─────────────────────────────────────────────────────────────────────────── */
-    .timeline-grid {
-      position: relative;
-      max-width: 52rem;
-      margin: 0 auto;
-    }
-    
-    /* Vertical line (desktop only) */
-    @media (min-width: 768px) {
-      .timeline-grid::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: var(--space-8);
-        width: 2px;
-        background: var(--border-subtle);
-        transition: background var(--transition-base);
-      }
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       TIMELINE ENTRY - ULTRA PREMIUM REVEAL
-       ─────────────────────────────────────────────────────────────────────────── */
-    .timeline-entry {
-      position: relative;
-      margin-bottom: var(--space-8);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: 
-        opacity var(--reveal-duration) var(--reveal-easing),
-        transform var(--reveal-duration) var(--reveal-easing);
-      transition-delay: var(--entry-delay, 0ms);
-    }
-    
-    .timeline-entry.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    @media (min-width: 768px) {
-      .timeline-entry {
-        padding-left: var(--space-7);
-        margin-bottom: var(--space-9);
-      }
-    }
-    
-    .timeline-entry:last-child {
-      margin-bottom: 0;
-    }
-    
-    /* Focus-within styling - NO tabindex needed */
-    .timeline-entry:focus-within .entry-content {
-      border-color: var(--accent-primary);
-      box-shadow: 0 0 0 3px rgba(30, 43, 74, 0.1);
-    }
-    
-    body.dark-mode .timeline-entry:focus-within .entry-content {
-      box-shadow: 0 0 0 3px rgba(90, 127, 163, 0.15);
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       TIMELINE MARKER (SQUARE, NO RADIUS)
-       ─────────────────────────────────────────────────────────────────────────── */
-    .entry-marker {
-      display: none;
-    }
-    
-    @media (min-width: 768px) {
-      .entry-marker {
-        display: block;
-        position: absolute;
-        left: -9px;
-        top: 4px;
-        width: 20px;
-        height: 20px;
-        background: var(--bg-elevated);
-        border: 2px solid var(--accent-primary);
-        transition: all var(--transition-base);
-        z-index: 3;
-      }
-      
-      /* Diamond variant for special moments */
-      .timeline-entry.milestone .entry-marker {
-        transform: rotate(45deg);
-        border-width: 3px;
-      }
-      
-      .timeline-entry:hover .entry-marker {
-        background: var(--accent-primary);
-        border-color: var(--accent-primary);
-        box-shadow: 0 0 0 4px rgba(30, 43, 74, 0.08);
-      }
-      
-      body.dark-mode .timeline-entry:hover .entry-marker {
-        box-shadow: 0 0 0 4px rgba(90, 127, 163, 0.12);
-      }
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       DATE
-       ─────────────────────────────────────────────────────────────────────────── */
-    .entry-date {
-      display: block;
-      font-family: var(--font-mono);
-      font-size: var(--text-sm);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-quaternary);
-      margin-bottom: var(--space-2);
-      font-feature-settings: 'tnum', 'lnum';
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       TITLE & SUBTITLE
-       ─────────────────────────────────────────────────────────────────────────── */
-    .entry-title {
-      font-family: var(--font-serif);
-      font-size: clamp(var(--text-lg), 3.5vw, var(--text-xl));
-      font-weight: 600;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      margin: 0 0 var(--space-2);
-      font-feature-settings: 'liga', 'kern';
-    }
-    
-    .entry-subtitle {
-      font-family: var(--font-serif);
-      font-size: var(--text-md);
-      font-style: italic;
-      font-weight: 400;
-      line-height: 1.4;
-      color: var(--text-tertiary);
-      margin: 0 0 var(--space-5);
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       CONTENT BLOCK
-       ─────────────────────────────────────────────────────────────────────────── */
-    .entry-content {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
-      border-left: 4px solid var(--accent-primary);
-      padding: var(--space-4);
-      margin-bottom: var(--space-4);
-      transition: all var(--transition-base);
-    }
-    
-    @media (min-width: 640px) {
-      .entry-content {
-        padding: var(--space-5);
-      }
-    }
-    
-    .timeline-entry:hover .entry-content {
-      border-color: var(--border-default);
-      border-left-color: var(--accent-primary);
-      box-shadow: var(--shadow-sm);
-    }
-    
-    .entry-content p {
-      font-size: var(--text-base);
-      line-height: 1.7;
-      color: var(--text-secondary);
-      margin: 0;
-    }
-    
-    .entry-content p + p {
-      margin-top: var(--space-3);
-    }
-    
-    .entry-content em {
-      font-style: italic;
-      font-family: var(--font-serif);
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       SOURCE REFERENCE
-       ─────────────────────────────────────────────────────────────────────────── */
-    .entry-source {
-      font-size: var(--text-sm);
-      line-height: 1.5;
-      color: var(--text-quaternary);
-      margin-top: var(--space-3);
-      padding-top: var(--space-3);
-      border-top: 1px solid var(--border-faint);
-    }
-    
-    .entry-source strong {
-      font-weight: 600;
-      color: var(--text-tertiary);
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       CONTEXT BOX
-       ─────────────────────────────────────────────────────────────────────────── */
-    .entry-context {
-      background: var(--bg-subtle);
-      border-left: 3px solid var(--accent-secondary);
-      padding: var(--space-3) var(--space-4);
-      margin-bottom: var(--space-5);
-      font-size: var(--text-base);
-      line-height: 1.6;
-      color: var(--text-secondary);
-    }
-    
-    .entry-context strong {
-      font-weight: 600;
-      color: var(--accent-primary);
-      display: block;
-      margin-bottom: var(--space-1);
-      font-size: var(--text-sm);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       IMAGE FIGURE
-       ─────────────────────────────────────────────────────────────────────────── */
-    .entry-figure {
-      margin: 0;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
-      overflow: hidden;
-      transition: all var(--transition-base);
-    }
-    
-    .entry-figure img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform var(--transition-slower), opacity var(--transition-base);
-    }
-    
-    body.dark-mode .entry-figure img {
-      opacity: 0.9;
-      filter: brightness(0.85) contrast(1.08);
-    }
-    
-    .entry-figure:hover img {
-      transform: scale(1.015);
-    }
-    
-    body.dark-mode .entry-figure:hover img {
-      opacity: 0.95;
-    }
-    
-    .entry-figure figcaption {
-      padding: var(--space-3) var(--space-4);
-      font-size: var(--text-sm);
-      font-weight: 500;
-      color: var(--text-tertiary);
-      background: var(--bg-subtle);
-      border-top: 1px solid var(--border-faint);
-      line-height: 1.5;
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       THEME TOGGLE - ZERO BORDER-RADIUS, PROPER TOUCH TARGET
-       ─────────────────────────────────────────────────────────────────────────── */
-    #theme-toggle {
-      position: fixed;
-      top: var(--space-3);
-      right: var(--space-3);
-      z-index: 9999;
-      width: 52px;
-      height: 52px;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-elevated);
-      color: var(--text-secondary);
-      border: 1px solid var(--border-subtle);
-      cursor: pointer;
-      transition: all var(--transition-base);
-      box-shadow: var(--shadow-xs);
-    }
-    
-    #theme-toggle:hover {
-      background: var(--bg-surface);
-      color: var(--accent-primary);
-      border-color: var(--border-default);
-      box-shadow: var(--shadow-sm);
-    }
-    
-    #theme-toggle:active {
-      transform: scale(0.96);
-    }
-    
-    #theme-toggle:focus-visible {
-      outline: 2px solid var(--accent-primary);
-      outline-offset: 3px;
-    }
-    
-    .theme-icon {
-      width: 20px;
-      height: 20px;
-      transition: all var(--transition-base);
-    }
-    
-    #theme-toggle:hover .theme-icon {
-      transform: rotate(15deg);
-    }
-    
-    /* Mobile: 48x48px minimum (WCAG AAA) */
-    @media (max-width: 767px) {
-      #theme-toggle {
-        width: 48px;
-        height: 48px;
-      }
-      
-      .theme-icon {
-        width: 18px;
-        height: 18px;
-      }
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       FOOTER
-       ─────────────────────────────────────────────────────────────────────────── */
-    .historia-footer {
-      max-width: 42rem;
-      margin: var(--space-10) auto 0;
-      padding: var(--space-5) 0 0;
-      border-top: 1px solid var(--border-subtle);
-      text-align: center;
-    }
-    
-    .historia-footer p {
-      font-size: var(--text-sm);
-      line-height: 1.6;
-      color: var(--text-quaternary);
-      margin: 0;
-    }
-    
-    .historia-footer a {
-      color: var(--accent-primary);
-      text-decoration: none;
-      font-weight: 500;
-      border-bottom: 1px solid var(--accent-primary);
-      transition: all var(--transition-fast);
-    }
-    
-    .historia-footer a:hover {
-      color: var(--accent-secondary);
-      border-bottom-color: var(--accent-secondary);
-    }
-    
-    .historia-footer a:focus-visible {
-      outline: 2px solid var(--accent-primary);
-      outline-offset: 3px;
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       DECORATIVE ELEMENTS
-       ─────────────────────────────────────────────────────────────────────────── */
-    
-    /* Ornamental separator for major milestones */
-    .timeline-entry.milestone::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 1px;
-      background: var(--border-default);
-      margin: var(--space-6) 0 0;
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       ACCESSIBILITY
-       ─────────────────────────────────────────────────────────────────────────── */
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-      
-      .timeline-entry {
-        opacity: 1;
-        transform: none;
-        transition-delay: 0ms !important;
-      }
-    }
-    
-    /* Enhanced contrast mode */
-    @media (prefers-contrast: high) {
-      :root {
-        --border-subtle: var(--noir);
-        --border-default: var(--noir);
-        --text-tertiary: var(--graphite);
-        --text-quaternary: var(--charcoal);
-      }
-      
-      body.dark-mode {
-        --border-subtle: var(--ivory);
-        --border-default: var(--ivory);
-        --text-tertiary: #CFCFCF;
-        --text-quaternary: #B0B0B0;
-      }
-      
-      .entry-content {
-        border-width: 2px;
-      }
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       PRINT STYLES
-       ─────────────────────────────────────────────────────────────────────────── */
-    @media print {
-      body,
-      body::before {
-        background: white;
-      }
-      
-      #theme-toggle,
-      .skip-link {
-        display: none;
-      }
-      
-      .timeline-entry {
-        page-break-inside: avoid;
-        margin-bottom: var(--space-5);
-        opacity: 1;
-        transform: none;
-      }
-      
-      .entry-figure {
-        max-height: 400px;
-      }
-      
-      .timeline-grid::before {
-        display: none;
-      }
-    }
-    
-    /* ───────────────────────────────────────────────────────────────────────────
-       MOBILE OPTIMIZATIONS
-       ─────────────────────────────────────────────────────────────────────────── */
-    @media (max-width: 767px) {
-      a,
-      button {
-        min-height: 44px;
-        min-width: 44px;
-      }
-    }
-    
-    @media (hover: none) and (pointer: coarse) {
-      .timeline-entry:active .entry-content {
-        background: var(--bg-subtle);
-      }
-    }
-    
-    @media (max-height: 500px) and (orientation: landscape) {
-      .historia-header {
-        margin-bottom: var(--space-6);
-      }
-      
-      .timeline-entry {
-        margin-bottom: var(--space-5);
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<!-- Skip link for accessibility -->
-<a class="skip-link" href="#historia">Saltar al contenido principal</a>
-
-<!-- ═══════════════════════════════════════════════════════════════════════════
-     THEME TOGGLE
-     ═══════════════════════════════════════════════════════════════════════════ -->
-<button 
-  id="theme-toggle" 
-  aria-label="Cambiar tema de color"
-  aria-pressed="false"
-  title="Cambiar entre modo claro y oscuro"
->
-  <svg class="theme-icon theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
-    <circle cx="12" cy="12" r="5"></circle>
-    <line x1="12" y1="1" x2="12" y2="3"></line>
-    <line x1="12" y1="21" x2="12" y2="23"></line>
-    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-    <line x1="1" y1="12" x2="3" y2="12"></line>
-    <line x1="21" y1="12" x2="23" y2="12"></line>
-    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-  </svg>
-  <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" style="display: none;" aria-hidden="true">
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-  </svg>
-</button>
-
-<!-- ═══════════════════════════════════════════════════════════════════════════
-     MAIN CONTAINER
-     ═══════════════════════════════════════════════════════════════════════════ -->
-<main class="historia-container" id="historia">
-  
-  <!-- HEADER -->
-  <header class="historia-header">
-    <span class="header-kicker">Patrimonio e Historia</span>
-    <h1 class="header-title">Un Viaje por la Historia de Herrera</h1>
-    <p class="header-intro">
-      Desde las termas romanas hasta el pueblo de hoy, 
-      estos son los momentos que nos hicieron ser quienes somos.
-    </p>
-  </header>
-
-  <!-- TIMELINE GRID -->
-  <div class="timeline-grid">
-    
-    <!-- ═════════════════════════════════════════════════════════════════════
-         ENTRY 1: TERMAS ROMANAS
-         ═════════════════════════════════════════════════════════════════════ -->
-    <article class="timeline-entry milestone" id="termas-romanas">
-      <div class="entry-marker" aria-hidden="true"></div>
-      
-      <time datetime="0200" class="entry-date">Siglo III</time>
-      <h2 class="entry-title">Las Termas Romanas</h2>
-      <p class="entry-subtitle">Cuando Herrera era un lugar de encuentro</p>
-      
-      <div class="entry-content">
-        <p>
-          Hace casi 2.000 años, aquí había termas públicas. Un lugar donde la gente se reunía, 
-          hablaba, descansaba. Los mosaicos que aún conservamos —como el del luchador— 
-          nos recuerdan que esta tierra ya era importante entonces.
-        </p>
-        
-        <div class="entry-source">
-          <strong>Referencia:</strong> Conjunto termal romano declarado BIC (Bien de Interés Cultural) en 2007
-        </div>
-      </div>
-      
-      <aside class="entry-context">
-        <strong>Por qué importa</strong>
-        Herrera no nació de la nada. Llevamos siglos siendo un lugar de paso, de vida compartida.
-      </aside>
-      
-      <figure class="entry-figure">
-        <img 
-          src="https://herrerahoy.es/img/timeline/mosaico-herrera-sevilla_69.webp" 
-          alt="Mosaico romano del Pugilator encontrado en las termas de Herrera, mostrando la figura de un luchador"
-          loading="lazy"
-          width="800"
-          height="600"
-        />
-        <figcaption>Mosaico del "Pugilator", siglo III d.C.</figcaption>
-      </figure>
-    </article>
-
-    <!-- ═════════════════════════════════════════════════════════════════════
-         ENTRY 2: FRONTERA MEDIEVAL
-         ═════════════════════════════════════════════════════════════════════ -->
-    <article class="timeline-entry" id="frontera-medieval">
-      <div class="entry-marker" aria-hidden="true"></div>
-      
-      <time datetime="1400" class="entry-date">Siglos XIV–XV</time>
-      <h2 class="entry-title">La Frontera que Desapareció</h2>
-      <p class="entry-subtitle">Vivir entre dos mundos</p>
-      
-      <div class="entry-content">
-        <p>
-          Durante generaciones, estas tierras estuvieron en la frontera entre reinos cristianos 
-          y musulmanes. Fortalezas como Alhonoz marcaban dónde terminaba un mundo y empezaba otro. 
-          La vida aquí era incierta, provisional.
-        </p>
-        <p>
-          Cuando Antequera cayó en 1410 y Granada en 1492, la frontera se disolvió. 
-          Por fin, la gente pudo quedarse.
-        </p>
-        
-        <div class="entry-source">
-          <strong>Contexto histórico:</strong> Conquista de Antequera (1410), Toma de Archidona (1468), Conquista de Granada (1492)
-        </div>
-      </div>
-      
-      <aside class="entry-context">
-        <strong>Por qué importa</strong>
-        Herrera existe porque un día dejó de ser peligroso vivir aquí.
-      </aside>
-      
-      <figure class="entry-figure">
-        <img 
-          src="https://herrerahoy.es/img/timeline/alhonoz.webp" 
-          alt="Restos de la fortaleza medieval de Alhonoz, marcando la antigua frontera entre reinos cristianos y musulmanes"
-          loading="lazy"
-          width="800"
-          height="600"
-        />
-        <figcaption>Fortaleza de Alhonoz, en la antigua frontera</figcaption>
-      </figure>
-    </article>
-
-    <!-- ═════════════════════════════════════════════════════════════════════
-         ENTRY 3: CORTIJO HERRERA
-         ═════════════════════════════════════════════════════════════════════ -->
-    <article class="timeline-entry" id="cortijo-herrera">
-      <div class="entry-marker" aria-hidden="true"></div>
-      
-      <time datetime="1511" class="entry-date">1511–1514</time>
-      <h2 class="entry-title">El Cortijo que Dio Nombre</h2>
-      <p class="entry-subtitle">Antes del pueblo, había un lugar</p>
-      
-      <div class="entry-content">
-        <p>
-          Las primeras menciones hablan de un cortijo con huertas y dehesa. 
-          Todavía no era un pueblo, pero ya tenía nombre: Herrera. 
-          Alguien cuidaba esa tierra, sembraba, recogía. Era el principio.
-        </p>
-        
-        <div class="entry-source">
-          <strong>Referencia:</strong> Primeras menciones documentales del Cortijo de Herrera (1511-1514)
-        </div>
-      </div>
-      
-      <aside class="entry-context">
-        <strong>Por qué importa</strong>
-        Todo pueblo empieza como algo pequeño, un lugar con nombre propio.
-      </aside>
-    </article>
-
-    <!-- ═════════════════════════════════════════════════════════════════════
-         ENTRY 4: EXPULSIÓN MORISCOS
-         ═════════════════════════════════════════════════════════════════════ -->
-    <article class="timeline-entry" id="expulsion-moriscos">
-      <div class="entry-marker" aria-hidden="true"></div>
-      
-      <time datetime="1610" class="entry-date">1610</time>
-      <h2 class="entry-title">Cuando los Moriscos se Fueron</h2>
-      <p class="entry-subtitle">Un vacío que otros llenaron</p>
-      
-      <div class="entry-content">
-        <p>
-          En 1610, miles de moriscos fueron expulsados de toda España. 
-          En nuestra zona, eso dejó casas vacías, tierras sin trabajar. 
-          Poco a poco, llegaron nuevos labradores buscando un lugar donde empezar.
-        </p>
-        <p>
-          No fue un momento alegre, pero permitió que este territorio volviera a llenarse de vida.
-        </p>
-        
-        <div class="entry-source">
-          <strong>Contexto histórico:</strong> Expulsión definitiva de los moriscos (1610)
-        </div>
-      </div>
-      
-      <aside class="entry-context">
-        <strong>Por qué importa</strong>
-        La historia de Herrera está hecha de llegadas y partidas.
-      </aside>
-      
-      <figure class="entry-figure">
-        <img 
-          src="https://herrerahoy.es/img/timeline/Travels-Zdjecie-wyrozniajace-Natalia.webp" 
-          alt="Representación histórica de la expulsión de los moriscos de España en 1610"
-          loading="lazy"
-          width="800"
-          height="600"
-        />
-        <figcaption>Expulsión de los moriscos, 1610</figcaption>
-      </figure>
-    </article>
-
-    <!-- ═════════════════════════════════════════════════════════════════════
-         ENTRY 5: PUEBLA OFICIAL
-         ═════════════════════════════════════════════════════════════════════ -->
-    <article class="timeline-entry milestone" id="puebla-oficial">
-      <div class="entry-marker" aria-hidden="true"></div>
-      
-      <time datetime="1631" class="entry-date">1631</time>
-      <h2 class="entry-title">La Puebla que se Hizo Oficial</h2>
-      <p class="entry-subtitle">El día que Herrera apareció en los documentos</p>
-      
-      <div class="entry-content">
-        <p>
-          En 1631, alguien decidió que este asentamiento debía ser oficial. 
-          Se parcelaron tierras, se firmaron papeles. Ya no era solo "el cortijo". 
-          Era la Puebla de Herrera.
-        </p>
-        <p>
-          Lo hicieron por dinero —había que pagar impuestos— pero también porque había 
-          gente suficiente viviendo aquí como para que importara.
-        </p>
-        
-        <div class="entry-source">
-          <strong>Referencia:</strong> Fundación oficial de la Puebla de Herrera mediante parcelación y censo enfitéutico (1631)
-        </div>
-      </div>
-      
-      <aside class="entry-context">
-        <strong>Por qué importa</strong>
-        Ese día, Herrera dejó de ser un lugar provisional.
-      </aside>
-      
-      <figure class="entry-figure">
-        <img 
-          src="https://herrerahoy.es/img/timeline/testamento-garcia-de-herrera.jpg" 
-          alt="Documento histórico del testamento de García de Herrera, fundación oficial de la Puebla de Herrera en 1631"
-          loading="lazy"
-          width="600"
-          height="800"
-          style="max-width: 400px; margin: 0 auto; display: block;"
-        />
-        <figcaption>Testamento de García de Herrera, 1631</figcaption>
-      </figure>
-    </article>
-
-    <!-- ═════════════════════════════════════════════════════════════════════
-         ENTRY 6: IGLESIA SANTIAGO
-         ═════════════════════════════════════════════════════════════════════ -->
-    <article class="timeline-entry milestone" id="iglesia-santiago">
-      <div class="entry-marker" aria-hidden="true"></div>
-      
-      <time datetime="1653" class="entry-date">1653</time>
-      <h2 class="entry-title">La Iglesia en el Centro</h2>
-      <p class="entry-subtitle">Un lugar donde reunirse</p>
-      
-      <div class="entry-content">
-        <p>
-          En 1653 se levantó la iglesia de Santiago el Mayor. No solo era un templo: 
-          era el edificio más grande, el lugar donde ocurrían bodas, bautizos, entierros. 
-          El centro de la vida del pueblo.
-        </p>
-        <p>
-          Durante siglos, casi todo lo importante pasó alrededor de esa iglesia.
-        </p>
-        
-        <div class="entry-source">
-          <strong>Referencia:</strong> Fundación de la Iglesia Parroquial de Santiago el Mayor (1653)
-        </div>
-      </div>
-      
-      <aside class="entry-context">
-        <strong>Por qué importa</strong>
-        Los pueblos se construyen alrededor de lugares de encuentro.
-      </aside>
-      
-      <figure class="entry-figure">
-        <img 
-          src="https://herrerahoy.es/img/timeline/HERRERA-Plaza%20Parroquia%20de%20Santiago.JPG" 
-          alt="Vista de la Plaza de la Parroquia de Santiago el Mayor en Herrera"
-          loading="lazy"
-          width="800"
-          height="600"
-        />
-        <figcaption>Plaza de la Parroquia de Santiago el Mayor</figcaption>
-      </figure>
-    </article>
-
-    <!-- ═════════════════════════════════════════════════════════════════════
-         ENTRY 7: MIGRACIÓN INTERNA
-         ═════════════════════════════════════════════════════════════════════ -->
-    <article class="timeline-entry" id="migracion-interna">
-      <div class="entry-marker" aria-hidden="true"></div>
-      
-      <time datetime="1725" class="entry-date">1700–1750</time>
-      <h2 class="entry-title">Gente que Llegaba de Otros Pueblos</h2>
-      <p class="entry-subtitle">Herrera crece</p>
-      
-      <div class="entry-content">
-        <p>
-          A lo largo del siglo XVIII, familias de Marinaleda, Écija y otros pueblos cercanos 
-          fueron llegando, motivadas por las ventajosas formas de arrendamiento de la Dehesa del Cortijo de Herrera.
-          Buscaban tierra, trabajo, un sitio donde criar a sus hijos. 
-          La calle Labradores empezó a llenarse de casas nuevas.
-        </p>
-        <p>
-          Herrera dejó de ser solo un grupo de vecinos o un poblado, y se convirtió en un pueblo.
-        </p>
-        
-        <div class="entry-source">
-          <strong>Contexto histórico:</strong> Oleada migratoria desde Marinaleda y pueblos de la zona (siglo XVIII)
-        </div>
-      </div>
-      
-      <aside class="entry-context">
-        <strong>Por qué importa</strong>
-        Somos un pueblo de mezclas, de gente que vino de otros lugares.
-      </aside>
-    </article>
-
-    <!-- ═════════════════════════════════════════════════════════════════════
-         ENTRY 8: SIGLO XIX
-         ═════════════════════════════════════════════════════════════════════ -->
-    <article class="timeline-entry" id="expansion-siglo-xix">
-      <div class="entry-marker" aria-hidden="true"></div>
-      
-      <time datetime="1850" class="entry-date">Siglo XIX</time>
-      <h2 class="entry-title">El Pueblo que Crece</h2>
-      <p class="entry-subtitle">Expansión y normalidad</p>
-      
-      <div class="entry-content">
-        <p>
-          Durante el siglo XIX, Herrera se consolidó. Más calles, más familias, más vida cotidiana. 
-          No hubo grandes eventos, pero sí trabajo diario: sembrar, cosechar, criar, construir.
-        </p>
-        <p>
-          A veces, la historia más importante es la que no aparece en los libros.
-        </p>
-        
-        <div class="entry-source">
-          <strong>Contexto histórico:</strong> Desarrollo urbano y consolidación municipal (siglo XIX)
-        </div>
-      </div>
-      
-      <aside class="entry-context">
-        <strong>Por qué importa</strong>
-        Un pueblo no se hace solo con fechas, sino con generaciones de gente viviendo.
-      </aside>
-      
-      <figure class="entry-figure">
-        <img 
-          src="https://herrerahoy.es/img/timeline/siglo%20XIX.webp" 
-          alt="Fotografía histórica de Herrera durante el siglo XIX"
-          loading="lazy"
-          width="800"
-          height="600"
-        />
-        <figcaption>Herrera en el siglo XIX</figcaption>
-      </figure>
-    </article>
-
-    <!-- ═════════════════════════════════════════════════════════════════════
-         ENTRY 9: ESCUDO OFICIAL
-         ═════════════════════════════════════════════════════════════════════ -->
-    <article class="timeline-entry" id="escudo-oficial">
-      <div class="entry-marker" aria-hidden="true"></div>
-      
-      <time datetime="1994" class="entry-date">1994</time>
-      <h2 class="entry-title">El Escudo Oficial</h2>
-      <p class="entry-subtitle">Una identidad reconocida</p>
-      
-      <div class="entry-content">
-        <p>
-          En 1994, Herrera adoptó oficialmente su escudo heráldico. No era solo un símbolo: 
-          era el reconocimiento de que este pueblo tiene historia, memoria, identidad propia.
-        </p>
-        
-        <div class="entry-source">
-          <strong>Referencia:</strong> Decreto del Escudo Heráldico Oficial de Herrera (1994)
-        </div>
-      </div>
-      
-      <aside class="entry-context">
-        <strong>Por qué importa</strong>
-        Tenemos símbolos porque importamos.
-      </aside>
-      
-      <figure class="entry-figure">
-        <img 
-          src="https://herrerahoy.es/img/timeline/Escudo_de_Herrera_(Sevilla).png" 
-          alt="Escudo heráldico oficial del municipio de Herrera"
-          loading="lazy"
-          width="400"
-          height="480"
-          style="max-width: 180px; margin: 0 auto; display: block;"
-        />
-        <figcaption>Escudo heráldico oficial de Herrera</figcaption>
-      </figure>
-    </article>
-
-    <!-- ═════════════════════════════════════════════════════════════════════
-         ENTRY 10: BIC TERMAS
-         ═════════════════════════════════════════════════════════════════════ -->
-    <article class="timeline-entry milestone" id="bic-termas">
-      <div class="entry-marker" aria-hidden="true"></div>
-      
-      <time datetime="2007" class="entry-date">2007</time>
-      <h2 class="entry-title">Las Termas, Protegidas para Siempre</h2>
-      <p class="entry-subtitle">Cuidar lo que heredamos</p>
-      
-      <div class="entry-content">
-        <p>
-          En 2007, el conjunto termal romano fue declarado Bien de Interés Cultural. 
-          Eso significa que está protegido por ley, que las futuras generaciones 
-          podrán verlo como nosotros lo vemos hoy.
-        </p>
-        
-        <div class="entry-source">
-          <strong>Referencia:</strong> Conjunto Termal declarado Bien de Interés Cultural (BIC) por la Junta de Andalucía (2007)
-        </div>
-      </div>
-      
-      <aside class="entry-context">
-        <strong>Por qué importa</strong>
-        No todo el pasado sobrevive. Este sí.
-      </aside>
-      
-      <figure class="entry-figure">
-        <img 
-          src="https://herrerahoy.es/img/timeline/conjunto_termal_herrera.JPG" 
-          alt="Vista exterior del conjunto termal romano de Herrera, declarado Bien de Interés Cultural"
-          loading="lazy"
-          width="800"
-          height="600"
-        />
-        <figcaption>Conjunto termal romano, protegido desde 2007</figcaption>
-      </figure>
-    </article>
-
-
-
-    <!-- ═════════════════════════════════════════════════════════════════════
-         ENTRY 12: HERRERA PRESENTE
-         ═════════════════════════════════════════════════════════════════════ -->
-    <article class="timeline-entry milestone" id="herrera-presente">
-      <div class="entry-marker" aria-hidden="true"></div>
-      
-      <time datetime="2026" class="entry-date">2026</time>
-      <h2 class="entry-title">Casi Siete Mil Historias</h2>
-      <p class="entry-subtitle">El pueblo que somos</p>
-      
-      <div class="entry-content">
-        <p>
-          Hoy somos aproximadamente 6.584 habitantes. Cada uno con su historia, su familia, su camino. 
-          Algunos nacieron aquí, otros llegaron buscando un lugar tranquilo. 
-          Todos compartimos algo: este pueblo.
-        </p>
-        <p>
-          Herrera, en la campiña sevillana, no es un museo. Es un lugar donde se vive, 
-          se trabaja, se crece. Y la historia sigue.
-        </p>
-        
-        <div class="entry-source">
-          <strong>Dato actual:</strong> Población aproximada según datos municipales (2026)
-        </div>
-      </div>
-      
-      <aside class="entry-context">
-        <strong>Por qué importa</strong>
-        Porque la historia no está en el pasado. Está en cada vecino que decide quedarse.
-      </aside>
-
-            <figure class="entry-figure">
-        <img 
-          src="https://herrerahoy.es/img/timeline/Vista_a%C3%A9rea_de_Herrera_(Sevilla).jpg" 
-          alt="Vista aérea del municipio de Herrera en la actualidad, mostrando el casco urbano"
-          loading="lazy"
-          width="800"
-          height="600"
-        />
-        <figcaption>Vista aérea de Herrera en la actualidad</figcaption>
-      </figure>
-    </article>
-
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="historia-footer">
-    <p>
-      Las imágenes mostradas se utilizan con fines informativos y divulgativos. 
-      Si eres autor o titular de derechos y deseas atribución o retirada, 
-      <a href="https://herrerahoy.es/asistente-municipal.html">contacta con nosotros</a>.
-    </p>
-  </footer>
-
-</main>
-
-<!-- ═══════════════════════════════════════════════════════════════════════════
-     JAVASCRIPT - PROFESSIONAL GRADE
-     ═══════════════════════════════════════════════════════════════════════════ -->
-<script>
-(function() {
-  'use strict';
-  
-  // ─────────────────────────────────────────────────────────────────────────
-  // THEME MANAGEMENT
-  // ─────────────────────────────────────────────────────────────────────────
-  const themeToggle = document.getElementById('theme-toggle');
-  const lightIcon = document.querySelector('.theme-icon-light');
-  const darkIcon = document.querySelector('.theme-icon-dark');
-  const body = document.body;
-  
-  function getSystemPreference() {
-    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  
-  function applyTheme(theme) {
-    const isDark = theme === 'dark';
-    body.classList.toggle('dark-mode', isDark);
-    lightIcon.style.display = isDark ? 'none' : 'block';
-    darkIcon.style.display = isDark ? 'block' : 'none';
-    themeToggle.setAttribute('aria-pressed', String(isDark));
-  }
-  
-  function toggleTheme() {
-    const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
-    applyTheme(newTheme);
-    localStorage.setItem('herrera-theme', newTheme);
-  }
-  
-  themeToggle.addEventListener('click', toggleTheme);
-  
-  // Initialize
-  const savedTheme = localStorage.getItem('herrera-theme') || getSystemPreference();
-  applyTheme(savedTheme);
-  
-  // Listen for system changes
-  window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (!localStorage.getItem('herrera-theme')) {
-      applyTheme(e.matches ? 'dark' : 'light');
-    }
-  });
   
   // ─────────────────────────────────────────────────────────────────────────
   // PREMIUM STAGGERED REVEAL - Natural human-level timing
